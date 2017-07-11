@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="com.gilat.ngnms.server.services.ws.cfg.face">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getCPEpartNumber>
+         <!--Optional:-->
+         <id>
+            <!--Optional:-->
+            <managedGroupId>3</managedGroupId>
+            <!--Optional:-->
+            <subscriberId>30021</subscriberId>
+         </id>
+      </com:getCPEpartNumber>
+   </soapenv:Body>
+</soapenv:Envelope>
