@@ -31,7 +31,7 @@ function getCPEsByManagedGroup() {
 	xhttp.setRequestHeader('SOAPAction', '');
 	//xhttp.setRequestHeader('Connection', 'keep-alive');
 	//xhttp.setRequestHeader("Authorization", "Basic " + btoa(user+' '+password));
-	//req = readXMLFile('~/Desktop/NBI_XML/getCPEsByManagedGroup.xml');
+	//req = readXMLFile('../XMLReqs/getCPEsByManagedGroup.xml');
 	//reqtxt = new XMLSerializer().serializeToString(req.documentElement);
 	reqtxt = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="com.gilat.ngnms.server.services.ws.cfg.face"><soapenv:Header/><soapenv:Body><com:getCPEsByManagedGroup><managedGroupId>2</managedGroupId><lastIndex>0</lastIndex></com:getCPEsByManagedGroup></soapenv:Body></soapenv:Envelope>'
 	xhttp.send(reqtxt);
