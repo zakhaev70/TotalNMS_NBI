@@ -5,7 +5,7 @@ Javier Sorribes, Hispasat S.A.
 Helper methods devised for SOAP apps
 ***/
 
-/* Reads file and calls writer with the plain text received */
+/* Reads file and calls writer with the plain text read */
 function readFile(filename, writer=dummy, async=true) {
     var file = new XMLHttpRequest();
     file.open('GET', filename, async);
@@ -20,7 +20,7 @@ function readFile(filename, writer=dummy, async=true) {
     file.send();
 }
 
-/* Reads file and calls handler with the xml received */
+/* Reads file and calls handler with the xml read */
 function readXMLFile(filename, handler=dummy, async=true) {
     var file = new XMLHttpRequest();
     file.open("GET", filename, async);
