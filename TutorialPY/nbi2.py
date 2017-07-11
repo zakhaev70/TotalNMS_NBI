@@ -13,7 +13,7 @@ with requests.Session() as s:
         body = f.read()
 
     r = s.post(host+'/cpeService', data=body)
-    print(r)  # response object
+    print(r)  #response object
     print('-'*60)   
 
     resp = ET.fromstring(r.text)  #creates XML element
