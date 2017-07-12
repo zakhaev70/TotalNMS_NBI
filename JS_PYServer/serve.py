@@ -14,11 +14,12 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 import time
 from base64 import b64decode
+import xml.etree.ElementTree as ET
 
 HOST_ADDR = '127.0.0.1'  #localhost
 PORT_NUMBER = 9000
 
-class NBIConnHandler(BaseHTTPRequestHandler):
+class NBIConnHandler(BaseHTTPRequestHandler):   
     def do_HEAD(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
@@ -71,10 +72,10 @@ class NBIConnHandler(BaseHTTPRequestHandler):
             s.headers.update(self.headers)
             for service in nbiwsdls:  #try all wsdls until right one
                 response = s.post(host+'/'+service, data=body)
-                if response.status_code == 200:
-                    break
+                if response.status_code!=500 or ET.fromstring(response.text)[0][0].find('detail') is not None:
+                    break  #only continue if command not in service (status_code 500 and XML response has no detail in fault)
             else:
-                print('--NBI command not found')  #could return xml message instead
+                print('--NBI command not found')  #could maybe return xml message instead
         return response
 
 if __name__ == '__main__':

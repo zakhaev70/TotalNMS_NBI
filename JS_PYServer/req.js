@@ -12,11 +12,21 @@ function getCPEsByManagedGroup(mgid) {
 	document.getElementById('numCPEs').innerHTML = 'Loading...'
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			xmlDoc = xhttp.responseXML;
-			ret = xmlDoc.childNodes[0].childNodes[0].childNodes[0];
-			document.getElementById('numCPEs').innerHTML = ret.getElementsByTagName('totalNumber')[0].childNodes[0].nodeValue;
-        }
+		if (this.readyState == 4) {
+            if (this.status == 200) {
+			    xmlDoc = xhttp.responseXML;
+			    ret = xmlDoc.childNodes[0].childNodes[0].childNodes[0];
+			    document.getElementById('numCPEs').innerHTML = ret.getElementsByTagName('totalNumber')[0].childNodes[0].nodeValue;
+            }
+		    else if (this.status == 500) {
+                xmlDoc = xhttp.responseXML;
+                fault = xmlDoc.childNodes[0].childNodes[0];
+			    document.getElementById('numCPEs').innerHTML = fault.getElementsByTagName('faultstring')[0].childNodes[0].nodeValue;
+            }
+            else {
+                document.getElementById('numCPEs').innerHTML = 'Not successful, status code: ' + this.status;
+            }
+		}
 	};
 	xhttp.open('POST', host, true);//, username, password);
 	//xhttp.withCredentials = true;

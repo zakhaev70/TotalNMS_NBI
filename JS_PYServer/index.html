@@ -6,15 +6,16 @@
 </head>
 <body>
 	<form name="cpesbymgid" action="javascript:getCPEsByManagedGroup(document.getElementById('managedGroupId').value)">
-	Managed Group ID:<br/>
-	<input id="managedGroupId" type="number" value="2" required autofocus autocomplete="off">
+	<label for="managedGroupId">Managed Group ID:</label><br/>
+	<input id="managedGroupId" type="number" value="2" required autofocus autocomplete="off" 
+            onkeydown="document.getElementById('numCPEs').innerHTML='-'">
 	<input type="submit" value="Search">
 	</form><br/>
 
-	Total number of CPEs found:
-	<div id="numCPEs" style="border-style:groove; width:4.5em; text-align:center">-</div>
+	<p>Total number of CPEs found:</p>
+	<div id="numCPEs" style="border-style:groove; display: inline-block; min-width: 4.5em; text-align:center">-</div>
 
 	<script src="../helpers.js"></script>
-	<script src="req.js"></script>
+	<script src="req.js"></script> 
 </body>
 </html>
