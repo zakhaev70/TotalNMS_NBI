@@ -5,10 +5,10 @@
 #
 # Server to connect to Gilat's SkyEdge II-c NBI, accounting for CORS (preflight and redirect)
 # Includes 'Access-Control-Allow-Origin' headers and more
+# Must send authorization credentials as header
 #
 # Tested with JavaScript and other Python3 applications
 #
-### FIX: Authentication should come from client (check post_NBI method)
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
