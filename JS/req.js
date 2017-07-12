@@ -12,17 +12,9 @@ function getCPEsByManagedGroup() {
 			console.log(xmlDoc);
 			ret = xmlDoc.childNodes[0].childNodes[0].childNodes[0];
 			document.getElementById('numCPEs').innerHTML = ret.getElementsByTagName('totalNumber')[0].nodeValue;
-			/*
-			with open('../NBI_XML/getCPEpartNumber.xml','r') as f:
-				body2 = ET.fromstring(f.read())
-
-			for cpe in ret.find('cpes')[:20]:
-				managedGroupId = cpe.find('cpeId/managedGroupId').text
-				subscriberId = cpe.find('cpeId/subscriberId').text
-			*/
         }
 		else if (this.readyState == 4 && this.status == 0) {
-			console.log('Oh: ' + this.statusText);
+			console.log('No response, should debug');
 			console.log(xhttp.getAllResponseHeaders());
 		}
 	};
