@@ -17,9 +17,8 @@ with requests.Session() as s:
     assert(mgid.isdigit())
     xmlbody = ET.fromstring(body)
     xmlbody[1][0][0].text = mgid  #managedGroupId tag gets new value
-    body = ET.tostring(xmlbody)
-
-    r = s.post(host+'/cpeService', data=body)
+     
+    r = s.post(host+'/cpeService', data=ET.tostring(xmlbody))
     resp = ET.fromstring(r.text)
     cpes = resp[0][0].find('return/cpes')
     
