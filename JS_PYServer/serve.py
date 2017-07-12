@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#! /usr/bin/env python3
 #
 # Javier Sorribes, Hispasat S.A.
 # 05/07/2017
