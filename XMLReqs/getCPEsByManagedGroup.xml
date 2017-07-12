@@ -2,9 +2,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <com:getCPEsByManagedGroup>
-         <!--Optional:-->
-         <managedGroupId>4</managedGroupId>
-         <!--Optional:-->
+         <managedGroupId>2</managedGroupId>
          <lastIndex>0</lastIndex>
       </com:getCPEsByManagedGroup>
    </soapenv:Body>
