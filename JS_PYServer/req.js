@@ -3,6 +3,8 @@ Javier Sorribes, Hispasat S.A.
 06/07/2017
 
 Requests to TotalNMS' NBI
+
+Requires ../helpers.js
 ***/
 var host = 'http://127.0.0.1:9000';
 var username = 'admin';
