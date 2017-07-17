@@ -1,7 +1,6 @@
 NBI techniques
 ==================================
-*By Javier Sorribes*, Hispasat S.A.
------------------------------------
+### *By Javier Sorribes*, Hispasat S.A.
 
 This repository collects a series of techniques to interact with the Northbound Interface (NBI) server for Gilat's TotalNMS.
 
@@ -17,7 +16,7 @@ JS
 
 Sample JS request which fails due to CORS' preflight issues, at least when run locally.
 
-**JS_PYServer**
+JS_PYServer
 ---------------
 
 Sample JS requests that work when serve.py (proxy server, accounts for CORS) is running. If run locally, should do so from Web Server for  Chrome.
