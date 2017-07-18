@@ -8,53 +8,53 @@ For comprehensive information, open *Manual NBI* (in Spanish). Below however, a 
 
 ```
 .TotalNMS_NBI
-|- docs
-|	|- Manual NBI.DOC
-|	|- Manual NBI.pdf
-|	|- Presentación NBI.pptx
-|- src
-|	|- XMLReqs
-|	|	|- getCpeVolumes.xml
-|	|	|- getCpePartNumber.xml
-|	|	|- getCPEsByManagedGroup.xml
-|	|	|- req_headers.txt
-|	|- helpers.js
-|	|- serve.py
-|- techniques
-|	|- EasySoap(Beta)
-|	|	|- reqes.html
-|	|	|- reqes.js
-|	|- JQuery
-|	|	|- indexjq.html
-|	|	|- indexjq2.html
-|	|	|- reqjq.js
-|	|	|- reqjq2.js
-|	|- JS
-|	|	|- req.html
-|	|	|- req.js
-|	|- JS_PYServer
-|	|	|- comb.py
-|	|	|- index.html
-|	|	|- req.js
-|	|	|- req.py
-|	|- PY
-|	|	|- comb.py
-|	|	|- p.py
-|	|	|- req.py
-|	|- TutorialJS
-|	|	|- hello.html
-|	|	|- hello.js
-|	|	|- hello.txt
-|	|	|- req.html
-|	|	|- req.js
-|	|- TutorialPY
-|	|	|- nbi.py
-|	|	|- nbi2.py
-|	|	|- nbi3.py
-|	|	|- nbi4.py
-|	|	|- out.txt
-|- .gitignore
-|- README.md
+├── docs
+|   ├── Manual NBI.DOC
+|   ├── Manual NBI.pdf
+|   ├── Presentación NBI.pptx
+├── src
+|   ├── XMLReqs
+|   |   ├── getCpeVolumes.xml
+|   |   ├── getCpePartNumber.xml
+|   |   ├── getCPEsByManagedGroup.xml
+|   |   ├── req_headers.txt
+|   ├── helpers.js
+|   ├── serve.py
+├── techniques
+|   ├── EasySoap(Beta)
+|   |   ├── reqes.html
+|   |   ├── reqes.js
+|   ├── JQuery
+|   |   ├── indexjq.html
+|   |   ├── indexjq2.html
+|   |   ├── reqjq.js
+|   |   ├── reqjq2.js
+|   ├── JS
+|   |   ├── req.html
+|   |   ├── req.js
+|   ├── JS_PYServer
+|   |   ├── comb.py
+|   |   ├── index.html
+|   |   ├── req.js
+|   |   ├── req.py
+|   ├── PY
+|   |   ├── comb.py
+|   |   ├── p.py
+|   |   ├── req.py
+|   ├── TutorialJS
+|   |   ├── hello.html
+|   |   ├── hello.js
+|   |   ├── hello.txt
+|   |   ├── req.html
+|   |   ├── req.js
+|   ├── TutorialPY
+|   |   ├── nbi.py
+|   |   ├── nbi2.py
+|   |   ├── nbi3.py
+|   |   ├── nbi4.py
+|   |   ├── out.txt
+├── .gitignore
+├── README.md
 ```
 
 techniques
