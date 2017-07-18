@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<form name="cpesbymgid" action="javascript:getCPEsByManagedGroup(document.getElementById('managedGroupId').value)">
+	<form id="cpesbymgid" action="javascript:getCPEsByManagedGroup()">
 	<label for="managedGroupId">Managed Group ID:</label><br/>
 	<input id="managedGroupId" type="number" value="2" required autofocus autocomplete="off" 
             onkeydown="document.getElementById('numCPEs').innerHTML='-'">
@@ -15,8 +15,7 @@
 	<p>Total number of CPEs found:</p>
 	<div id="numCPEs" style="border-style:groove; display: inline-block; min-width: 4.5em; text-align:center">-</div>
 
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="../helpers.js"></script>
-	<script src="reqjq.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="reqjq.js"></script> 
 </body>
 </html>

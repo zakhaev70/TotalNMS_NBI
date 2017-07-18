@@ -4,7 +4,7 @@ Javier Sorribes, Hispasat S.A.
 
 Requests to TotalNMS' NBI in jQuery
 
-Requires ../helpers.js
+Requires jQuery
 ***/
 
 var $ajaxSetup = $.ajaxSetup({
@@ -19,15 +19,13 @@ var $ajaxSetup = $.ajaxSetup({
     url: 'http://127.0.0.1:9000'
 });
 
-function getCPEsByManagedGroup(mgid) {
+function getCPEsByManagedGroup() {
 	$('#numCPEs').text('Loading...');
-	var req;
-	readXMLFile('../XMLReqs/getCPEsByManagedGroup.xml', function(xml) {
-		req = xml;
-	}, false);  // async=false so it waits and puts the xml into req
-    $(req).find('managedGroupId').text(mgid);
-    reqtxt = new XMLSerializer().serializeToString(req.documentElement);
-    $.post($ajaxSetup.url, reqtxt, function(resp){
-        $('#numCPEs').text( $(resp).find('totalNumber').text() );
+	$.get('../XMLReqs/getCPEsByManagedGroup.xml', function(req){
+        $(req).find('managedGroupId').text( $('input#managedGroupId').val() );
+        reqtxt = new XMLSerializer().serializeToString(req.documentElement);
+        $.post($ajaxSetup.url, reqtxt, function(resp){
+            $('#numCPEs').text( $(resp).find('totalNumber').text() );
+        });
     });
 }
