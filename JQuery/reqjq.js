@@ -16,6 +16,9 @@ var $ajaxSetup = $.ajaxSetup({
     },
     contentType: 'xml',  //type specs not required either
     dataType: 'xml',
+    error: function(xhr){
+        $('#numCPEs').text( $(xhr.responseText).find('faultString').text() );
+    },
     url: 'http://127.0.0.1:9000'
 });
 
@@ -29,3 +32,4 @@ function getCPEsByManagedGroup() {
         });
     });
 }
+
