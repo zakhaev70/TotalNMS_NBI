@@ -9,7 +9,7 @@ with requests.Session() as s:
     s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 
             'SOAPAction': '', 'Connection': 'keep-alive'})
 
-    with open('../XMLReqs/getCPEsByManagedGroup.xml','r') as f:
+    with open('/src/XMLReqs/getCPEsByManagedGroup.xml','r') as f:
         body = f.read()
 
     r = s.post(host+'/cpeService', data=body)

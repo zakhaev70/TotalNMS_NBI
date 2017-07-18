@@ -31,7 +31,7 @@ function getCPEsByManagedGroup() {
         },
         success: function(xhr){req=xhr;},
         type: 'GET',
-        url: '../XMLReqs/getCPEsByManagedGroup.xml'
+        url: '/src/XMLReqs/getCPEsByManagedGroup.xml'
     });
     $(req).find('managedGroupId').text( $('input#managedGroupId').val() );
     reqtxt = new XMLSerializer().serializeToString(req.documentElement);
