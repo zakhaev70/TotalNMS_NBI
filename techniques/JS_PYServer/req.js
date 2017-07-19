@@ -16,13 +16,13 @@ function getCPEsByManagedGroup(mgid) {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4) {
             if (this.status == 200) {
-			    xmlDoc = xhttp.responseXML;
-			    ret = xmlDoc.childNodes[0].childNodes[0].childNodes[0];
+			    var xmlDoc = xhttp.responseXML;
+			    var ret = xmlDoc.childNodes[0].childNodes[0].childNodes[0];
 			    document.getElementById('numCPEs').innerHTML = ret.getElementsByTagName('totalNumber')[0].childNodes[0].nodeValue;
             }
 		    else if (this.status == 500) {
-                xmlDoc = xhttp.responseXML;
-                fault = xmlDoc.childNodes[0].childNodes[0];
+                var xmlDoc = xhttp.responseXML;
+                var fault = xmlDoc.childNodes[0].childNodes[0];
 			    document.getElementById('numCPEs').innerHTML = fault.getElementsByTagName('faultstring')[0].childNodes[0].nodeValue;
             }
             else {
@@ -41,6 +41,6 @@ function getCPEsByManagedGroup(mgid) {
 		req = xml;
 	}, false);  // async=false so it waits and puts the xml into req
 	getFirstChild(getFirstChild(getChild(req.documentElement,1))).childNodes[0].nodeValue = mgid;  //input id
-	reqtxt = new XMLSerializer().serializeToString(req.documentElement);
+	var reqtxt = new XMLSerializer().serializeToString(req.documentElement);
 	xhttp.send(reqtxt);
 }

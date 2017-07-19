@@ -34,7 +34,7 @@ function getCPEsByManagedGroup() {
         url: '../../src/XMLReqs/getCPEsByManagedGroup.xml'
     });
     $(req).find('managedGroupId').text( $('input#managedGroupId').val() );
-    reqtxt = new XMLSerializer().serializeToString(req.documentElement);
+    var reqtxt = new XMLSerializer().serializeToString(req.documentElement);
     $.ajax($.extend({}, $postSetup, {  //this technique allows for other posts
         data: reqtxt, 
         error: function(xhr){

@@ -26,7 +26,7 @@ function getCPEsByManagedGroup() {
 	$('#numCPEs').text('Loading...');
 	$.get('../../src/XMLReqs/getCPEsByManagedGroup.xml', function(req){
         $(req).find('managedGroupId').text( $('input#managedGroupId').val() );
-        reqtxt = new XMLSerializer().serializeToString(req.documentElement);
+        var reqtxt = new XMLSerializer().serializeToString(req.documentElement);
         $.post($ajaxSetup.url, reqtxt, function(resp){
             $('#numCPEs').text( $(resp).find('totalNumber').text() );
         });
