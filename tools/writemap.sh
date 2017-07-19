@@ -1,4 +1,4 @@
-outfile="sitemap.md";
+outfile=sitemap.md;
 
 function writemap() {
     local dir="..";
@@ -30,7 +30,7 @@ writemap;
 echo "\`\`\`" >> $outfile;
 
 if [[ $0 == *writemap.sh ]]; then
-    echo "Output written to ${outfile}:";
+    echo "Map written to ${outfile}:";
     cat $outfile;
 fi
 

@@ -37,7 +37,7 @@ function getCPEsByManagedGroup(mgid) {
 	xhttp.setRequestHeader('SOAPAction', '');
 	//xhttp.setRequestHeader('Connection', 'keep-alive');  //not required
 	var req;
-	readXMLFile('/src/XMLReqs/getCPEsByManagedGroup.xml', function(xml) {
+	readXMLFile('../../src/XMLReqs/getCPEsByManagedGroup.xml', function(xml) {
 		req = xml;
 	}, false);  // async=false so it waits and puts the xml into req
 	getFirstChild(getFirstChild(getChild(req.documentElement,1))).childNodes[0].nodeValue = mgid;  //input id

@@ -8,7 +8,7 @@ with requests.Session() as s:
     s.auth=('admin','manager')
     s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
 
-    with open('/src/XMLReqs/getCPEsByManagedGroup.xml','r') as f:
+    with open('../../src/XMLReqs/getCPEsByManagedGroup.xml','r') as f:
         body = f.read()
 
     r = s.post(host+'/cpeService', data=body)
@@ -18,7 +18,7 @@ with requests.Session() as s:
     ret = ET.fromstring(r.text)[0][0][0]
     print('Total number of CPEs found:', ret.find('totalNumber').text)
 
-    with open('/src/XMLReqs/getCPEpartNumber.xml','r') as f:
+    with open('../../src/XMLReqs/getCPEpartNumber.xml','r') as f:
         body2 = ET.fromstring(f.read())
 
     for cpe in ret.find('cpes')[:20]:

@@ -27,13 +27,12 @@ Sitemap
 
 ```
 .TotalNMS_NBI
-├── .gitignore
 ├── docs
 │   ├── Manual NBI.DOC
 │   ├── Manual NBI.pdf
 │   ├── Presentación NBI.pptx
+├── .gitignore
 ├── README.md
-├── sitemap.md
 ├── src
 │   ├── helpers.js
 │   ├── serve.py
@@ -47,10 +46,10 @@ Sitemap
 │   │   ├── reqes.html
 │   │   ├── reqes.js
 │   ├── JQuery
-│   │   ├── indexjq.html
 │   │   ├── indexjq2.html
-│   │   ├── reqjq.js
+│   │   ├── indexjq.html
 │   │   ├── reqjq2.js
+│   │   ├── reqjq.js
 │   ├── JS
 │   │   ├── req.html
 │   │   ├── req.js
@@ -70,10 +69,10 @@ Sitemap
 │   │   ├── req.html
 │   │   ├── req.js
 │   ├── TutorialPY
-│   │   ├── nbi.py
 │   │   ├── nbi2.py
 │   │   ├── nbi3.py
 │   │   ├── nbi4.py
+│   │   ├── nbi.py
 │   │   ├── out.txt
 ├── tools
 │   ├── readmetxt.md

@@ -8,9 +8,9 @@ with requests.Session() as s:
     s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 
             'SOAPAction': '', 'Connection': 'keep-alive'})
 
-    with open('/src/XMLReqs/getCPEsByManagedGroup.xml','r') as f:
+    with open('../../src/XMLReqs/getCPEsByManagedGroup.xml','r') as f:
         body = f.read()
-    with open('/src/XMLReqs/getCPEVolumes.xml','r') as f2:
+    with open('../../src/XMLReqs/getCPEVolumes.xml','r') as f2:
         body2 = f2.read()
 
     mgid = input('Enter Managed Group ID: ')
