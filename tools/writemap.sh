@@ -34,7 +34,7 @@ function writemap() {
     
         for f in `ls -A $dir`; do
             filename=$( basename "${f}" );
-            if [[ $filename != ".git" ]] && ! $( contains $gitignore $filename ); then
+            if ! $( contains $gitignore $filename ); then
                 echo "${tab}${filename}" >> $outfile;
                 if [ -d $dir/$filename ]; then
                     wmrec $dir/$filename "${tab}";
