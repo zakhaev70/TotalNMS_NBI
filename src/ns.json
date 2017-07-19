@@ -1,0 +1,4 @@
+{
+    "_comment": "namespaces used in NBI's SOAP messages",
+    "soap": "http://schemas.xmlsoap.org/soap/envelope/"
+}

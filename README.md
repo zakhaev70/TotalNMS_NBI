@@ -41,16 +41,18 @@ Sitemap
 
 ```
 .TotalNMS_NBI
+├── .gitignore
 ├── docs
 │   ├── Manual NBI.DOC
 │   ├── Manual NBI.pdf
 │   ├── Presentación NBI.pptx
 ├── functions
+│   ├── commands.py
 │   ├── onlineReport.py
-├── .gitignore
 ├── README.md
 ├── src
 │   ├── helpers.js
+│   ├── ns.json
 │   ├── serve.py
 │   ├── XMLReqs
 │   │   ├── getCPEpartNumber.xml
@@ -63,10 +65,10 @@ Sitemap
 │   │   ├── reqes.html
 │   │   ├── reqes.js
 │   ├── JQuery
-│   │   ├── indexjq2.html
 │   │   ├── indexjq.html
-│   │   ├── reqjq2.js
+│   │   ├── indexjq2.html
 │   │   ├── reqjq.js
+│   │   ├── reqjq2.js
 │   ├── JS
 │   │   ├── req.html
 │   │   ├── req.js
@@ -86,10 +88,10 @@ Sitemap
 │   │   ├── req.html
 │   │   ├── req.js
 │   ├── TutorialPY
+│   │   ├── nbi.py
 │   │   ├── nbi2.py
 │   │   ├── nbi3.py
 │   │   ├── nbi4.py
-│   │   ├── nbi.py
 │   │   ├── out.txt
 ├── tools
 │   ├── readmetxt.md
