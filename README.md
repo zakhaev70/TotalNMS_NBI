@@ -4,11 +4,22 @@ NBI techniques for Gilat's Total_NMS
 
 This repository collects a series of techniques to interact with the Northbound Interface (NBI) server for Gilat's TotalNMS.
 
-For comprehensive information, open *Manual NBI* (in Spanish). Below however, some quick descriptions and a map of this repo's content are provided, in alphabetical order.
+For comprehensive information, open *Manual NBI* (in Spanish). Below however, usage details as well as some quick descriptions and a map of this repo's content are provided, in alphabetical order.
 
-techniques
+Usage
+-----
+### Contribution instructions
+Before submitting any changes, make sure to run `./tools/updatereadme.sh .` from the root directory of the repo. You might need to add some permissions: `chmod +x ./tools/writemap.sh` & `chmod +x ./tools/writemap.sh`
+
+You may add new XML files as needed at /src/XMLReqs. Make sure to document all changes.
+
+### Running the scripts
+If ran locally, cross-origin errors might occur, especially with .html and .js files. We recommend opening .html files through a local server, like *Web Server for Chrome*.
+
+Since the NBI server currently does not fulfill all CORS requirements, you might need to send all your requests (especially those from .js files) to the proxy server found in /src/serve.py, through ip address `http://127.0.0.1:9000`. This is a Python 3 script, so you will need to run it as such, and keep it running while your application is in process.
+
+/techniques
 --------------
-
 ### EasySoap(Beta)
 Contains just a few attempts to use EasySoap for NodeJS. Not of much interest, but could investigate further on this topic.
 
