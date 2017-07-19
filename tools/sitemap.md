@@ -4,6 +4,8 @@
 │   ├── Manual NBI.DOC
 │   ├── Manual NBI.pdf
 │   ├── Presentación NBI.pptx
+├── functions
+│   ├── onlineReport.py
 ├── .gitignore
 ├── README.md
 ├── src
@@ -13,6 +15,7 @@
 │   │   ├── getCPEpartNumber.xml
 │   │   ├── getCPEsByManagedGroup.xml
 │   │   ├── getCPEVolumes.xml
+│   │   ├── getNumberOfActiveCPEs.xml
 │   │   ├── req_headers.txt
 ├── techniques
 │   ├── EasySoap(Beta)
