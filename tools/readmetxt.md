@@ -23,6 +23,9 @@ Since the NBI server currently does not fulfill all CORS requirements, you might
 ### EasySoap(Beta)
 Contains just a few attempts to use EasySoap for NodeJS. Not of much interest, but could investigate further on this topic.
 
+### JQuery
+...
+
 ### JS
 Sample JS request which fails due to CORS' preflight issues, at least when run locally.
 

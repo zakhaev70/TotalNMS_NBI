@@ -9,7 +9,7 @@ For comprehensive information, open *Manual NBI* (in Spanish). Below however, us
 Usage
 -----
 ### Contribution instructions
-Before submitting any changes, make sure to run `./tools/updatereadme.sh .` from the root directory of the repo. You might need to add some permissions: `chmod +x ./tools/writemap.sh` & `chmod +x ./tools/writemap.sh`
+Before submitting any changes, make sure to run `./tools/updatereadme.sh .` from the root directory of the repo. You might need to add some permissions: `chmod +x ./tools/updatereadme.sh` & `chmod +x ./tools/writemap.sh`
 
 You may add new XML files as needed at /src/XMLReqs. Make sure to document all changes.
 
@@ -22,6 +22,9 @@ Since the NBI server currently does not fulfill all CORS requirements, you might
 --------------
 ### EasySoap(Beta)
 Contains just a few attempts to use EasySoap for NodeJS. Not of much interest, but could investigate further on this topic.
+
+### JQuery
+...
 
 ### JS
 Sample JS request which fails due to CORS' preflight issues, at least when run locally.
