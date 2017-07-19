@@ -1,12 +1,9 @@
 ```
 .TotalNMS_NBI
 ├── docs
-│   ├── Manual
-│   ├── NBI.DOC
-│   ├── Manual
-│   ├── NBI.pdf
-│   ├── Presentación
-│   ├── NBI.pptx
+│   ├── Manual NBI.DOC
+│   ├── Manual NBI.pdf
+│   ├── Presentación NBI.pptx
 ├── .gitignore
 ├── README.md
 ├── src

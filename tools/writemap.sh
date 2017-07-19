@@ -1,6 +1,3 @@
-SAVEIFS=$IFS;  #by convention, use \n as breaks
-IFS=$(echo -en "\n\b");
-
 function contains() {  #checks if pattern match in file
     a=( $( cat $1 ) );
     s=$2;
@@ -13,6 +10,8 @@ function contains() {  #checks if pattern match in file
 }
 
 function writemap() {
+    SAVEIFS=$IFS;  #use \n as breaks
+    IFS=$(echo -en "\n\b");
     outfile=sitemap.md;
     gitignore=../.gitignore;
     if [[ $# -ge 1 ]]; then
@@ -41,6 +40,7 @@ function writemap() {
                 fi
             fi
         done
+        IFS=$SAVEIFS;  
     }
 
     wmrec;
@@ -53,4 +53,3 @@ if [[ $0 == *writemap.sh ]]; then
     cat $outfile;
 fi
 
-IFS=$SAVEIFS;  
