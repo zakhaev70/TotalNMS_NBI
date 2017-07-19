@@ -9,7 +9,7 @@ For comprehensive information, open *Manual NBI* (in Spanish). Below however, us
 Usage
 -----
 ### Contribution instructions
-Before submitting any changes, make sure to run `./tools/updatereadme.sh .` from the root directory of the repo. You might need to add some permissions: `chmod +x ./tools/writemap.sh` & `chmod +x ./tools/writemap.sh`
+Before submitting any changes, make sure to run `./tools/updatereadme.sh .` from the root directory of the repo. You might need to add some permissions: `chmod +x ./tools/updatereadme.sh` & `chmod +x ./tools/writemap.sh`
 
 You may add new XML files as needed at /src/XMLReqs. Make sure to document all changes.
 
