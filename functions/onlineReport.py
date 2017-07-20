@@ -1,41 +1,78 @@
 import requests
 import xml.etree.ElementTree as ET
+import NBI
 
-host = 'http://172.19.254.3/ws'
-ns = {'soap':'http://schemas.xmlsoap.org/soap/envelope/'}  # namespaces for path traversal
+### Commands ###
+def numCPEsInMG(session, mgid):
+    with open(NBI.sitepath('/src/XMLReqs/getCPEsByManagedGroup.xml'),'r') as f:
+        body = f.read()
+    req = ET.fromstring(body)
+    req[1][0].find('managedGroupId').text = str(mgid)
+    req[1][0].find('lastIndex').text = '0'
 
-def isFault(resp):
-    if type(resp) is not ET.Element:
-        resp = ET.fromstring(resp)  #then, it's string
-    fault = resp[0].find('soap:Fault',ns)
-    if fault:
-        ret = {'faultcode': fault.find('faultcode').text,
-                'faultstring': fault.find('faultstring').text}
-        detail = fault.find('detail') 
-        if detail:
-            ret['businessFaultTypeCode'] = detail[0].find('businessFaultTypeCode').text
-        return ret
+    r = session.post(NBI.host+'/cpeService', data=ET.tostring(req))
+    resp = ET.fromstring(r.text)
+    isfault = NBI.isFault(resp)
+    if isfault:
+        return isfault['faultstring']
     else:
-        return None
+        return resp[0][0].find('return/totalNumber').text
 
-def numOnlineByMGId(session, mgid):
-    with open('../src/XMLReqs/getNumberOfActiveCPEs.xml','r') as f:
+def numCPEsOnlineByMGId(session, mgid):
+    with open(NBI.sitepath('/src/XMLReqs/getNumberOfActiveCPEs.xml'),'r') as f:
         body = f.read()
     req = ET.fromstring(body)
     req[1][0].find('managedGroupId').text = str(mgid)
 
-    r = session.post(host+'/elementsInformationService', data=ET.tostring(req))
+    r = session.post(NBI.host+'/elementsInformationService', data=ET.tostring(req))
     resp = ET.fromstring(r.text)
-    isfault = isFault(resp)
+    isfault = NBI.isFault(resp)
     if isfault:
         return isfault['faultstring']
     else:
         return resp[0][0].find('return').text
 
+def allCPEsConnectivityByMGId(session, mgid, verbose=False):
+    if verbose:
+        print('--allCPEsConnectivityByMGId(): Loading request xml...')
+    with open(NBI.sitepath('/src/XMLReqs/getCPEsByManagedGroup.xml'),'r') as f:
+        body = f.read()
+    req = ET.fromstring(body)
+
+    report, hasMore, lastIndex = {}, True, 0
+    while hasMore:
+        req[1][0].find('managedGroupId').text = str(mgid)
+        req[1][0].find('lastIndex').text = lastIndex
+        if verbose:
+            print('--allCPEsConnectivityByMGId(): Waiting for server response...',' '*20)
+        r = session.post(NBI.host+'/cpeService', data=ET.tostring(req))
+        resp = ET.fromstring(r.text)
+        isfault = NBI.isFault(resp)
+        if isfault:
+            return isfault['faultstring']
+        else:
+            ret = resp[0][0].find('return')
+            hasMore, lastIndex = 'true'==ret.find('hasMore').text.lower(), ret.find('lastIndex').text
+            for cpe in ret.find('cpes'):
+                state = cpe.find('operationalState').text
+                if verbose:
+                    print('--allCPEsConnectivityByMGId(): Checking cpe #{}: {}{}'.format(
+                            cpe[0][1].text, state, ' '*10), end='\r')
+                report[state] = report.setdefault(state, 0) + 1
+    if verbose:
+        print('--allCPEsConnectivityByMGId(): Process finished', end=(' '*20)+'\n')
+    return report  #dictionary with number of CPEs in each operational state
+
+### Main for debugging purposes ###
 if __name__=='__main__':
+    import sys
     with requests.Session() as s:
-        s.auth=('admin','manager')
+        s.auth=(NBI._username, NBI._password)
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
-        
-        for i in range(1,15):
-            print(i, numOnlineByMGId(s, i), sep=': ')
+
+        #mgs = NBI.allMGs(2,True,True)
+        #activeCPEs = {i: int(numCPEsOnlineByMGId(s,i)) for i in mgs}
+        print('numCPEsOnlineByMGId: ', activeCPEs)
+        #allCPEs = {i: int(numCPEsInMG(s,i)) for i in mgs}
+        #print('numCPEsInMG:', allCPEs)
+        print(allCPEsConnectivityByMGId(s, 2 if len(sys.argv)==1 else sys.argv[1], True))

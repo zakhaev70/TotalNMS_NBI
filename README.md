@@ -46,7 +46,7 @@ Sitemap
 │   ├── Manual NBI.pdf
 │   ├── Presentación NBI.pptx
 ├── functions
-│   ├── commands.py
+│   ├── NBI.py
 │   ├── onlineReport.py
 ├── .gitignore
 ├── README.md
