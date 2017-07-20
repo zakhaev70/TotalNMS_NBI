@@ -35,9 +35,9 @@ def numCPEsOnlineInMG(session, mgid):
         return resp[0][0].find('return').text
 
 #Returns the number of CPEs in each operational state in a MG
-def allCPEsConnectivityByMGId(session, mgid, verbose=False):
+def allCPEsOpStateInMG(session, mgid, verbose=False):
     if verbose:
-        print('--allCPEsConnectivityByMGId(): Loading request xml...')
+        print('--allCPEsOpStateInMG({}): Loading request xml...'.format(mgid))
     with open(NBI.sitepath('/src/XMLReqs/getCPEsByManagedGroup.xml'),'r') as f:
         body = f.read()
     req = ET.fromstring(body)
@@ -47,7 +47,7 @@ def allCPEsConnectivityByMGId(session, mgid, verbose=False):
         req[1][0].find('managedGroupId').text = str(mgid)
         req[1][0].find('lastIndex').text = lastIndex
         if verbose:
-            print('--allCPEsConnectivityByMGId(): Waiting for server response...',' '*20)
+            print('--allCPEsOpStateInMG({}): Waiting for server response...'.format(mgid),' '*20)
         r = session.post(NBI.host+'/cpeService', data=ET.tostring(req))
         resp = ET.fromstring(r.text)
         isfault = NBI.isFault(resp)
@@ -59,13 +59,31 @@ def allCPEsConnectivityByMGId(session, mgid, verbose=False):
             for cpe in ret.find('cpes'):
                 state = cpe.find('operationalState').text
                 if verbose:
-                    print('--allCPEsConnectivityByMGId(): Checking cpe #{}: {}{}'.format(
-                            cpe[0][1].text, state, ' '*10), end='\r')
+                    print('--allCPEsOpStateInMG({}): Checking cpe #{}: {}{}'.format(
+                            mgid, cpe[0][1].text, state, ' '*10), end='\r')
                 report[state] = report.setdefault(state, 0) + 1
     if verbose:
-        print('--allCPEsConnectivityByMGId(): Process finished', end=(' '*20)+'\n')
+        print('--allCPEsOpStateInMG({}): Process finished'.format(mgid), end=(' '*20)+'\n')
     return report  #dictionary with number of CPEs in each operational state
 
+#Returns a dict of dicts with all the CPEs' operational states for all MGs. Can take very long
+def fullOpStateReport(session, verbose=False):
+    return {mgid: allCPEsOpStateInMG(session, mgid, verbose) for mgid in NBI.allMGs(verbose=verbose,keepVerbose=verbose)}
+
+#Returns a pretty tabular representation of full opstate report
+def prettyFullOpStateReport(session, verbose=False):
+    allopstates = fullOpStateReport(session, verbose)
+    allstates = sorted(set(st for d in allopstates.values() for st in d))
+    maxlen = max(len('Total'), max(len(s) for s in allstates)) + 2
+    head = ' '*3+'|'+'|'.join(s.center(maxlen) for s in allstates)+'|'+'Total'.center(maxlen)
+    stringy = head
+    for i in sorted(allopstates.keys()):
+        stringy += '\n' + '-'*len(head)
+        states = allopstates[i]
+        stringy += '\n' + str(i).center(3) + '|' 
+        stringy += '|'.join(str(states.setdefault(s,0)).center(maxlen) for s in allstates)
+        stringy += '|' +str(sum(states.values())).center(maxlen)
+    return stringy
 ### Main for debugging purposes ###
 if __name__=='__main__':
     import sys
@@ -78,4 +96,6 @@ if __name__=='__main__':
         #print('numCPEsOnlineInMG: ', activeCPEs)
         #allCPEs = {i: int(numCPEsInMG(s,i)) for i in mgs}
         #print('numCPEsInMG:', allCPEs)
-        print(allCPEsConnectivityByMGId(s, 2 if len(sys.argv)==1 else sys.argv[1], True))
+        #print(allCPEsOpStateInMG(s, 6, True))  
+        print(prettyFullOpStateReport(s,'-v' in sys.argv))
+         
