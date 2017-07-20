@@ -75,15 +75,16 @@ def prettyFullOpStateReport(session, verbose=False):
     allopstates = fullOpStateReport(session, verbose)
     allstates = sorted(set(st for d in allopstates.values() for st in d))
     maxlen = max(len('Total'), max(len(s) for s in allstates)) + 2
-    head = ' '*3+'|'+'|'.join(s.center(maxlen) for s in allstates)+'|'+'Total'.center(maxlen)
-    stringy = head
+    stringy = ' '*3+'|'+'|'.join(s.center(maxlen) for s in allstates)+'|'+'Total'.center(maxlen)
+    headlen = len(stringy)
     for i in sorted(allopstates.keys()):
-        stringy += '\n' + '-'*len(head)
+        stringy += '\n' + '-'*headlen
         states = allopstates[i]
         stringy += '\n' + str(i).center(3) + '|' 
         stringy += '|'.join(str(states.setdefault(s,0)).center(maxlen) for s in allstates)
         stringy += '|' +str(sum(states.values())).center(maxlen)
     return stringy
+
 ### Main for debugging purposes ###
 if __name__=='__main__':
     import sys
