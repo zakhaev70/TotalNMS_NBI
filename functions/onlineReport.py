@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import NBI
 
 ### Commands ###
+#Returns the total number of CPEs in a MG
 def numCPEsInMG(session, mgid):
     with open(NBI.sitepath('/src/XMLReqs/getCPEsByManagedGroup.xml'),'r') as f:
         body = f.read()
@@ -18,7 +19,8 @@ def numCPEsInMG(session, mgid):
     else:
         return resp[0][0].find('return/totalNumber').text
 
-def numCPEsOnlineByMGId(session, mgid):
+#Return the total number of CPEs online in a MG
+def numCPEsOnlineInMG(session, mgid):
     with open(NBI.sitepath('/src/XMLReqs/getNumberOfActiveCPEs.xml'),'r') as f:
         body = f.read()
     req = ET.fromstring(body)
@@ -32,6 +34,7 @@ def numCPEsOnlineByMGId(session, mgid):
     else:
         return resp[0][0].find('return').text
 
+#Returns the number of CPEs in each operational state in a MG
 def allCPEsConnectivityByMGId(session, mgid, verbose=False):
     if verbose:
         print('--allCPEsConnectivityByMGId(): Loading request xml...')
@@ -71,8 +74,8 @@ if __name__=='__main__':
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
 
         #mgs = NBI.allMGs(2,True,True)
-        #activeCPEs = {i: int(numCPEsOnlineByMGId(s,i)) for i in mgs}
-        print('numCPEsOnlineByMGId: ', activeCPEs)
+        #activeCPEs = {i: int(numCPEsOnlineInMG(s,i)) for i in mgs}
+        #print('numCPEsOnlineInMG: ', activeCPEs)
         #allCPEs = {i: int(numCPEsInMG(s,i)) for i in mgs}
         #print('numCPEsInMG:', allCPEs)
         print(allCPEsConnectivityByMGId(s, 2 if len(sys.argv)==1 else sys.argv[1], True))
