@@ -1,0 +1,511 @@
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="com.gilat.ngnms.server.services.ws.cfg.face" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="QOSService" targetNamespace="com.gilat.ngnms.server.services.ws.cfg.face">
+<wsdl:types>
+<xs:schema xmlns:tns="urn:com.gilat.ngnms.server.ws.faults.dto" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:com.gilat.ngnms.server.ws.faults.dto" version="1.0">
+<xs:element name="NgnmsBusinessFaultDetails" type="tns:NgnmsBusinessFaultDetails"/>
+<xs:complexType name="NgnmsBusinessFaultDetails">
+<xs:sequence>
+<xs:element name="businessFaultTypeCode" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:tns="urn:com.gilat.ngnms.server.ws.dto.cfg" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:com.gilat.ngnms.server.ws.dto.cfg" version="1.0">
+<xs:element name="Backhauling" type="tns:Backhauling"/>
+<xs:element name="CPEId" type="tns:CPEId"/>
+<xs:element name="FreeZoneRow" type="tns:FreeZoneRow"/>
+<xs:element name="QOSCmb" type="tns:QOSCmb"/>
+<xs:element name="QOSFwd" type="tns:QOSFwd"/>
+<xs:element name="QOSLevelCmb" type="tns:QOSLevelCmb"/>
+<xs:element name="QOSLevelFwd" type="tns:QOSLevelFwd"/>
+<xs:element name="QOSLevelRtn" type="tns:QOSLevelRtn"/>
+<xs:element name="QOSRtn" type="tns:QOSRtn"/>
+<xs:element name="SLA" type="tns:SLA"/>
+<xs:element name="VOIP" type="tns:VOIP"/>
+<xs:element name="Volume" type="tns:Volume"/>
+<xs:element name="Volumes" type="tns:Volumes"/>
+<xs:complexType name="SLA">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="description" type="xs:string"/>
+<xs:element minOccurs="0" name="slaType" type="xs:string"/>
+<xs:element minOccurs="0" name="fwdTable" type="tns:QOSFwd"/>
+<xs:element minOccurs="0" name="rtnTable" type="tns:QOSRtn"/>
+<xs:element minOccurs="0" name="combinedQos" type="tns:QOSCmb"/>
+<xs:element minOccurs="0" name="freeZoneTable">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:FreeZoneRow"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="voip" type="tns:VOIP"/>
+<xs:element minOccurs="0" name="maximumConcurrentMultimediaSessions" type="xs:string"/>
+<xs:element minOccurs="0" name="backhauling" type="tns:Backhauling"/>
+<xs:element minOccurs="0" name="parent_folder" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QOSFwd">
+<xs:sequence>
+<xs:element minOccurs="0" name="brCeiling" type="xs:string"/>
+<xs:element minOccurs="0" name="brFloor" type="xs:string"/>
+<xs:element minOccurs="0" name="lastStepConnectivity" type="xs:string"/>
+<xs:element minOccurs="0" name="qosLevels">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:QOSLevelFwd"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QOSLevelFwd">
+<xs:sequence>
+<xs:element minOccurs="0" name="consumedVolume" type="xs:string"/>
+<xs:element minOccurs="0" name="brNominal" type="xs:string"/>
+<xs:element minOccurs="0" name="vip" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QOSRtn">
+<xs:sequence>
+<xs:element minOccurs="0" name="brCeiling" type="xs:string"/>
+<xs:element minOccurs="0" name="brFloor" type="xs:string"/>
+<xs:element minOccurs="0" name="lastStepConnectivity" type="xs:string"/>
+<xs:element minOccurs="0" name="qosLevels">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:QOSLevelRtn"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QOSLevelRtn">
+<xs:sequence>
+<xs:element minOccurs="0" name="consumedVolume" type="xs:string"/>
+<xs:element minOccurs="0" name="brNominal" type="xs:string"/>
+<xs:element minOccurs="0" name="vip" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QOSCmb">
+<xs:sequence>
+<xs:element minOccurs="0" name="fwdCeiling" type="xs:string"/>
+<xs:element minOccurs="0" name="fwdFloor" type="xs:string"/>
+<xs:element minOccurs="0" name="rtnCeiling" type="xs:string"/>
+<xs:element minOccurs="0" name="rtnFloor" type="xs:string"/>
+<xs:element minOccurs="0" name="lastStepConnectivity" type="xs:string"/>
+<xs:element minOccurs="0" name="qosLevels">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:QOSLevelCmb"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="QOSLevelCmb">
+<xs:sequence>
+<xs:element minOccurs="0" name="consumedVolume" type="xs:string"/>
+<xs:element minOccurs="0" name="fwdNominal" type="xs:string"/>
+<xs:element minOccurs="0" name="fwdVip" type="xs:string"/>
+<xs:element minOccurs="0" name="rtnNominal" type="xs:string"/>
+<xs:element minOccurs="0" name="rtnVip" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="FreeZoneRow">
+<xs:sequence>
+<xs:element minOccurs="0" name="startTime" type="xs:string"/>
+<xs:element minOccurs="0" name="stopTime" type="xs:string"/>
+<xs:element minOccurs="0" name="reoccurrence" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="VOIP">
+<xs:sequence>
+<xs:element minOccurs="0" name="sip" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Backhauling">
+<xs:sequence>
+<xs:element minOccurs="0" name="rtnBackhaulingMir" type="xs:string"/>
+<xs:element minOccurs="0" name="fwdBackhaulingMir" type="xs:string"/>
+<xs:element minOccurs="0" name="rtnBackhaulingMirValue" type="xs:string"/>
+<xs:element minOccurs="0" name="fwdBackhaulingMirValue" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CPEId">
+<xs:sequence>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+<xs:element minOccurs="0" name="subscriberId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Volumes">
+<xs:sequence>
+<xs:element minOccurs="0" name="consumed" type="tns:Volume"/>
+<xs:element minOccurs="0" name="added" type="tns:Volume"/>
+<xs:element minOccurs="0" name="remaining" type="tns:Volume"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Volume">
+<xs:sequence>
+<xs:element minOccurs="0" name="fwdQuota" type="xs:string"/>
+<xs:element minOccurs="0" name="rtnQuota" type="xs:string"/>
+<xs:element minOccurs="0" name="cmbQuota" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:ns0="urn:com.gilat.ngnms.server.ws.faults.dto" xmlns:ns1="urn:com.gilat.ngnms.server.ws.dto.cfg" xmlns:tns="com.gilat.ngnms.server.services.ws.cfg.face" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="com.gilat.ngnms.server.services.ws.cfg.face">
+<xs:import namespace="urn:com.gilat.ngnms.server.ws.dto.cfg"/>
+<xs:element name="addCPETopUp" type="tns:addCPETopUp"/>
+<xs:element name="addCPETopUpResponse" type="tns:addCPETopUpResponse"/>
+<xs:element name="addSLAToManagedGroup" type="tns:addSLAToManagedGroup"/>
+<xs:element name="addSLAToManagedGroupResponse" type="tns:addSLAToManagedGroupResponse"/>
+<xs:element name="createSLA" type="tns:createSLA"/>
+<xs:element name="createSLAResponse" type="tns:createSLAResponse"/>
+<xs:element name="deleteSLA" type="tns:deleteSLA"/>
+<xs:element name="deleteSLAResponse" type="tns:deleteSLAResponse"/>
+<xs:element name="getCPEVolumes" type="tns:getCPEVolumes"/>
+<xs:element name="getCPEVolumesResponse" type="tns:getCPEVolumesResponse"/>
+<xs:element name="getSLAbyName" type="tns:getSLAbyName"/>
+<xs:element name="getSLAbyNameResponse" type="tns:getSLAbyNameResponse"/>
+<xs:element name="getSLAs" type="tns:getSLAs"/>
+<xs:element name="getSLAsResponse" type="tns:getSLAsResponse"/>
+<xs:element name="manualResetCPEPeriodQuota" type="tns:manualResetCPEPeriodQuota"/>
+<xs:element name="manualResetCPEPeriodQuotaResponse" type="tns:manualResetCPEPeriodQuotaResponse"/>
+<xs:element name="modifySLA" type="tns:modifySLA"/>
+<xs:element name="modifySLAResponse" type="tns:modifySLAResponse"/>
+<xs:element name="removeSLAFromManagedGroup" type="tns:removeSLAFromManagedGroup"/>
+<xs:element name="removeSLAFromManagedGroupResponse" type="tns:removeSLAFromManagedGroupResponse"/>
+<xs:complexType name="getSLAs">
+<xs:sequence>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getSLAsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="ns1:SLA"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createSLA">
+<xs:sequence>
+<xs:element minOccurs="0" name="sla" type="ns1:SLA"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createSLAResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getSLAbyName">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getSLAbyNameResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="ns1:SLA"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEVolumes">
+<xs:sequence>
+<xs:element minOccurs="0" name="cpeId" type="ns1:CPEId"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEVolumesResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="ns1:Volumes"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteSLA">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteSLAResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="manualResetCPEPeriodQuota">
+<xs:sequence>
+<xs:element minOccurs="0" name="cpeId" type="ns1:CPEId"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="manualResetCPEPeriodQuotaResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="removeSLAFromManagedGroup">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="removeSLAFromManagedGroupResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="addCPETopUp">
+<xs:sequence>
+<xs:element minOccurs="0" name="cpeId" type="ns1:CPEId"/>
+<xs:element minOccurs="0" name="topupVolume" type="ns1:Volume"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="addCPETopUpResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="addSLAToManagedGroup">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="addSLAToManagedGroupResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="modifySLA">
+<xs:sequence>
+<xs:element minOccurs="0" name="sla" type="ns1:SLA"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="modifySLAResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:element name="NgnmsBusinessFaultException" nillable="true" type="ns0:NgnmsBusinessFaultDetails"/>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getCPEVolumesResponse">
+<wsdl:part element="tns:getCPEVolumesResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getSLAbyName">
+<wsdl:part element="tns:getSLAbyName" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createSLAResponse">
+<wsdl:part element="tns:createSLAResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="NgnmsBusinessFaultException">
+<wsdl:part element="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEVolumes">
+<wsdl:part element="tns:getCPEVolumes" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="removeSLAFromManagedGroup">
+<wsdl:part element="tns:removeSLAFromManagedGroup" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="addCPETopUp">
+<wsdl:part element="tns:addCPETopUp" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="modifySLAResponse">
+<wsdl:part element="tns:modifySLAResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="addCPETopUpResponse">
+<wsdl:part element="tns:addCPETopUpResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="modifySLA">
+<wsdl:part element="tns:modifySLA" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="manualResetCPEPeriodQuotaResponse">
+<wsdl:part element="tns:manualResetCPEPeriodQuotaResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getSLAsResponse">
+<wsdl:part element="tns:getSLAsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getSLAs">
+<wsdl:part element="tns:getSLAs" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createSLA">
+<wsdl:part element="tns:createSLA" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="removeSLAFromManagedGroupResponse">
+<wsdl:part element="tns:removeSLAFromManagedGroupResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteSLA">
+<wsdl:part element="tns:deleteSLA" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="manualResetCPEPeriodQuota">
+<wsdl:part element="tns:manualResetCPEPeriodQuota" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteSLAResponse">
+<wsdl:part element="tns:deleteSLAResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getSLAbyNameResponse">
+<wsdl:part element="tns:getSLAbyNameResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="addSLAToManagedGroup">
+<wsdl:part element="tns:addSLAToManagedGroup" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="addSLAToManagedGroupResponse">
+<wsdl:part element="tns:addSLAToManagedGroupResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="QOSWebService">
+<wsdl:operation name="getSLAs">
+<wsdl:input message="tns:getSLAs" name="getSLAs"></wsdl:input>
+<wsdl:output message="tns:getSLAsResponse" name="getSLAsResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="createSLA">
+<wsdl:input message="tns:createSLA" name="createSLA"></wsdl:input>
+<wsdl:output message="tns:createSLAResponse" name="createSLAResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getSLAbyName">
+<wsdl:input message="tns:getSLAbyName" name="getSLAbyName"></wsdl:input>
+<wsdl:output message="tns:getSLAbyNameResponse" name="getSLAbyNameResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCPEVolumes">
+<wsdl:input message="tns:getCPEVolumes" name="getCPEVolumes"></wsdl:input>
+<wsdl:output message="tns:getCPEVolumesResponse" name="getCPEVolumesResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="deleteSLA">
+<wsdl:input message="tns:deleteSLA" name="deleteSLA"></wsdl:input>
+<wsdl:output message="tns:deleteSLAResponse" name="deleteSLAResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="manualResetCPEPeriodQuota">
+<wsdl:input message="tns:manualResetCPEPeriodQuota" name="manualResetCPEPeriodQuota"></wsdl:input>
+<wsdl:output message="tns:manualResetCPEPeriodQuotaResponse" name="manualResetCPEPeriodQuotaResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="removeSLAFromManagedGroup">
+<wsdl:input message="tns:removeSLAFromManagedGroup" name="removeSLAFromManagedGroup"></wsdl:input>
+<wsdl:output message="tns:removeSLAFromManagedGroupResponse" name="removeSLAFromManagedGroupResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="addCPETopUp">
+<wsdl:input message="tns:addCPETopUp" name="addCPETopUp"></wsdl:input>
+<wsdl:output message="tns:addCPETopUpResponse" name="addCPETopUpResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="addSLAToManagedGroup">
+<wsdl:input message="tns:addSLAToManagedGroup" name="addSLAToManagedGroup"></wsdl:input>
+<wsdl:output message="tns:addSLAToManagedGroupResponse" name="addSLAToManagedGroupResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="modifySLA">
+<wsdl:input message="tns:modifySLA" name="modifySLA"></wsdl:input>
+<wsdl:output message="tns:modifySLAResponse" name="modifySLAResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="QOSServiceSoapBinding" type="tns:QOSWebService">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="getSLAs">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getSLAs">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getSLAsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="createSLA">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="createSLA">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="createSLAResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getSLAbyName">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getSLAbyName">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getSLAbyNameResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCPEVolumes">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCPEVolumes">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCPEVolumesResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="deleteSLA">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="deleteSLA">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="deleteSLAResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="manualResetCPEPeriodQuota">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="manualResetCPEPeriodQuota">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="manualResetCPEPeriodQuotaResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="removeSLAFromManagedGroup">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="removeSLAFromManagedGroup">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="removeSLAFromManagedGroupResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="addCPETopUp">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="addCPETopUp">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="addCPETopUpResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="addSLAToManagedGroup">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="addSLAToManagedGroup">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="addSLAToManagedGroupResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="modifySLA">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="modifySLA">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="modifySLAResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="QOSService">
+<wsdl:port binding="tns:QOSServiceSoapBinding" name="QOSServicePort">
+<soap:address location="http://172.19.254.3/ws/qosService"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

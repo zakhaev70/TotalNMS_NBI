@@ -1,0 +1,364 @@
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="com.gilat.ngnms.server.services.ws.cfg.face" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ElementsInformationService" targetNamespace="com.gilat.ngnms.server.services.ws.cfg.face">
+<wsdl:types>
+<xs:schema xmlns:tns="urn:com.gilat.ngnms.server.ws.faults.dto" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:com.gilat.ngnms.server.ws.faults.dto" version="1.0">
+<xs:element name="NgnmsBusinessFaultDetails" type="tns:NgnmsBusinessFaultDetails"/>
+<xs:complexType name="NgnmsBusinessFaultDetails">
+<xs:sequence>
+<xs:element name="businessFaultTypeCode" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:tns="urn:com.gilat.ngnms.server.ws.dto.cfg" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:com.gilat.ngnms.server.ws.dto.cfg" version="1.0">
+<xs:element name="CPEId" type="tns:CPEId"/>
+<xs:element name="Element" type="tns:Element"/>
+<xs:element name="FWDNUF" type="tns:FWDNUF"/>
+<xs:element name="IPHistory" type="tns:IPHistory"/>
+<xs:element name="Point" type="tns:Point"/>
+<xs:element name="RTNNUF" type="tns:RTNNUF"/>
+<xs:element name="Report" type="tns:Report"/>
+<xs:element name="ReportElement" type="tns:ReportElement"/>
+<xs:element name="Series" type="tns:Series"/>
+<xs:complexType name="FWDNUF">
+<xs:sequence>
+<xs:element minOccurs="0" name="nsId" type="xs:int"/>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:int"/>
+<xs:element minOccurs="0" name="nuf" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="RTNNUF">
+<xs:sequence>
+<xs:element minOccurs="0" name="nsId" type="xs:int"/>
+<xs:element minOccurs="0" name="hspId" type="xs:int"/>
+<xs:element minOccurs="0" name="nuf" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ReportElement">
+<xs:sequence>
+<xs:element minOccurs="0" name="element" type="tns:Element"/>
+<xs:element minOccurs="0" name="reportType" type="xs:string"/>
+<xs:element minOccurs="0" name="resolution" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Element">
+<xs:sequence>
+<xs:element minOccurs="0" name="eType" type="xs:string"/>
+<xs:element minOccurs="0" name="eId" type="xs:int"/>
+<xs:element minOccurs="0" name="cpeId" type="tns:CPEId"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CPEId">
+<xs:sequence>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+<xs:element minOccurs="0" name="subscriberId" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Report">
+<xs:sequence>
+<xs:element minOccurs="0" name="totalNumber" type="xs:int"/>
+<xs:element minOccurs="0" name="lastIndex" type="xs:int"/>
+<xs:element name="hasMore" type="xs:boolean"/>
+<xs:element minOccurs="0" name="type" type="xs:string"/>
+<xs:element minOccurs="0" name="series">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:Series"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Series">
+<xs:sequence>
+<xs:element minOccurs="0" name="element" type="tns:Element"/>
+<xs:element minOccurs="0" name="reportType" type="xs:string"/>
+<xs:element minOccurs="0" name="points">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:Point"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Point">
+<xs:sequence>
+<xs:element name="x" type="xs:long"/>
+<xs:element name="y" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="IPHistory">
+<xs:sequence>
+<xs:element minOccurs="0" name="cpeId" type="tns:CPEId"/>
+<xs:element minOccurs="0" name="action" type="xs:string"/>
+<xs:element minOccurs="0" name="actionTime" type="xs:long"/>
+<xs:element minOccurs="0" name="vlanId" type="xs:int"/>
+<xs:element minOccurs="0" name="peerCpeID" type="tns:CPEId"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:ns0="urn:com.gilat.ngnms.server.ws.faults.dto" xmlns:ns1="urn:com.gilat.ngnms.server.ws.dto.cfg" xmlns:tns="com.gilat.ngnms.server.services.ws.cfg.face" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="com.gilat.ngnms.server.services.ws.cfg.face">
+<xs:import namespace="urn:com.gilat.ngnms.server.ws.dto.cfg"/>
+<xs:element name="getCPEHistoryByType" type="tns:getCPEHistoryByType"/>
+<xs:element name="getCPEHistoryByTypeResponse" type="tns:getCPEHistoryByTypeResponse"/>
+<xs:element name="getCPEIPHistory" type="tns:getCPEIPHistory"/>
+<xs:element name="getCPEIPHistoryResponse" type="tns:getCPEIPHistoryResponse"/>
+<xs:element name="getCPEsHistoryFile" type="tns:getCPEsHistoryFile"/>
+<xs:element name="getCPEsHistoryFileResponse" type="tns:getCPEsHistoryFileResponse"/>
+<xs:element name="getElementPerformance" type="tns:getElementPerformance"/>
+<xs:element name="getElementPerformanceResponse" type="tns:getElementPerformanceResponse"/>
+<xs:element name="getFWDNUFs" type="tns:getFWDNUFs"/>
+<xs:element name="getFWDNUFsResponse" type="tns:getFWDNUFsResponse"/>
+<xs:element name="getNumberOfActiveCPEs" type="tns:getNumberOfActiveCPEs"/>
+<xs:element name="getNumberOfActiveCPEsResponse" type="tns:getNumberOfActiveCPEsResponse"/>
+<xs:element name="getRTNNUFs" type="tns:getRTNNUFs"/>
+<xs:element name="getRTNNUFsResponse" type="tns:getRTNNUFsResponse"/>
+<xs:complexType name="getNumberOfActiveCPEs">
+<xs:sequence>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNumberOfActiveCPEsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getFWDNUFs">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getFWDNUFsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="ns1:FWDNUF"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getRTNNUFs">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getRTNNUFsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="ns1:RTNNUF"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getElementPerformance">
+<xs:sequence>
+<xs:element minOccurs="0" name="reportElement" type="ns1:ReportElement"/>
+<xs:element minOccurs="0" name="lastIndex" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getElementPerformanceResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="ns1:Report"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEsHistoryFile">
+<xs:sequence>
+<xs:element minOccurs="0" name="managedGroupId" type="xs:string"/>
+<xs:element minOccurs="0" name="ftpServer" type="xs:string"/>
+<xs:element minOccurs="0" name="path" type="xs:string"/>
+<xs:element minOccurs="0" name="user" type="xs:string"/>
+<xs:element minOccurs="0" name="password" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEsHistoryFileResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEIPHistory">
+<xs:sequence>
+<xs:element minOccurs="0" name="subscriberPublicIpAddress" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEIPHistoryResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="ns1:IPHistory"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEHistoryByType">
+<xs:sequence>
+<xs:element minOccurs="0" name="valueType" type="xs:string"/>
+<xs:element minOccurs="0" name="value" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCPEHistoryByTypeResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="ns1:IPHistory"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="NgnmsBusinessFaultException" nillable="true" type="ns0:NgnmsBusinessFaultDetails"/>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getNumberOfActiveCPEsResponse">
+<wsdl:part element="tns:getNumberOfActiveCPEsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getRTNNUFsResponse">
+<wsdl:part element="tns:getRTNNUFsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="NgnmsBusinessFaultException">
+<wsdl:part element="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getFWDNUFs">
+<wsdl:part element="tns:getFWDNUFs" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getRTNNUFs">
+<wsdl:part element="tns:getRTNNUFs" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEsHistoryFileResponse">
+<wsdl:part element="tns:getCPEsHistoryFileResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getFWDNUFsResponse">
+<wsdl:part element="tns:getFWDNUFsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEsHistoryFile">
+<wsdl:part element="tns:getCPEsHistoryFile" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEHistoryByTypeResponse">
+<wsdl:part element="tns:getCPEHistoryByTypeResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEIPHistoryResponse">
+<wsdl:part element="tns:getCPEIPHistoryResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getNumberOfActiveCPEs">
+<wsdl:part element="tns:getNumberOfActiveCPEs" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getElementPerformance">
+<wsdl:part element="tns:getElementPerformance" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getElementPerformanceResponse">
+<wsdl:part element="tns:getElementPerformanceResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEIPHistory">
+<wsdl:part element="tns:getCPEIPHistory" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getCPEHistoryByType">
+<wsdl:part element="tns:getCPEHistoryByType" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="ElementsInformationWebService">
+<wsdl:operation name="getNumberOfActiveCPEs">
+<wsdl:input message="tns:getNumberOfActiveCPEs" name="getNumberOfActiveCPEs"></wsdl:input>
+<wsdl:output message="tns:getNumberOfActiveCPEsResponse" name="getNumberOfActiveCPEsResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getFWDNUFs">
+<wsdl:input message="tns:getFWDNUFs" name="getFWDNUFs"></wsdl:input>
+<wsdl:output message="tns:getFWDNUFsResponse" name="getFWDNUFsResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getRTNNUFs">
+<wsdl:input message="tns:getRTNNUFs" name="getRTNNUFs"></wsdl:input>
+<wsdl:output message="tns:getRTNNUFsResponse" name="getRTNNUFsResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getElementPerformance">
+<wsdl:input message="tns:getElementPerformance" name="getElementPerformance"></wsdl:input>
+<wsdl:output message="tns:getElementPerformanceResponse" name="getElementPerformanceResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCPEsHistoryFile">
+<wsdl:input message="tns:getCPEsHistoryFile" name="getCPEsHistoryFile"></wsdl:input>
+<wsdl:output message="tns:getCPEsHistoryFileResponse" name="getCPEsHistoryFileResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCPEIPHistory">
+<wsdl:input message="tns:getCPEIPHistory" name="getCPEIPHistory"></wsdl:input>
+<wsdl:output message="tns:getCPEIPHistoryResponse" name="getCPEIPHistoryResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCPEHistoryByType">
+<wsdl:input message="tns:getCPEHistoryByType" name="getCPEHistoryByType"></wsdl:input>
+<wsdl:output message="tns:getCPEHistoryByTypeResponse" name="getCPEHistoryByTypeResponse"></wsdl:output>
+<wsdl:fault message="tns:NgnmsBusinessFaultException" name="NgnmsBusinessFaultException"></wsdl:fault>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ElementsInformationServiceSoapBinding" type="tns:ElementsInformationWebService">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="getNumberOfActiveCPEs">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getNumberOfActiveCPEs">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getNumberOfActiveCPEsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getRTNNUFs">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getRTNNUFs">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getRTNNUFsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getFWDNUFs">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getFWDNUFs">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getFWDNUFsResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getElementPerformance">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getElementPerformance">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getElementPerformanceResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCPEsHistoryFile">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCPEsHistoryFile">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCPEsHistoryFileResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCPEIPHistory">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCPEIPHistory">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCPEIPHistoryResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getCPEHistoryByType">
+<soap:operation soapAction="" style="document"/>
+<wsdl:input name="getCPEHistoryByType">
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="getCPEHistoryByTypeResponse">
+<soap:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="NgnmsBusinessFaultException">
+<soap:fault name="NgnmsBusinessFaultException" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ElementsInformationService">
+<wsdl:port binding="tns:ElementsInformationServiceSoapBinding" name="ElementsInformationServicePort">
+<soap:address location="http://172.19.254.3/ws/elementsInformationService"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
