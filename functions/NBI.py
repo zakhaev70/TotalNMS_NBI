@@ -75,7 +75,7 @@ def allMGs(start=0, verbose=False, keepVerbose=False):
             if keepVerbose:
                 print('--allMGs(): Process finished at id #', i, sep='', end=(' '*20)+'\n')
             else:
-                print(' '*50, end='\r')
+                print(' '*60, end='\r')
         return mgs
 
 ### Main for debugging purposes ###
