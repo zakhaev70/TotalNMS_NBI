@@ -46,7 +46,8 @@ def isMG(mgid):
         r = s.post(host+'/elementsInformationService', data=ET.tostring(req))
         return not isFault(r) 
 
-def allMGs(start=0, verbose=False):
+#Might take a few seconds to execute
+def allMGs(start=0, verbose=False, keepVerbose=False):
     with requests.Session() as s:
         s.auth=(_username, _password)
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
@@ -57,7 +58,7 @@ def allMGs(start=0, verbose=False):
         req = ET.fromstring(body)
         while not outofrange or (outofrange and not goneinrange):
             if verbose:
-                print('--allMGs(): Checking id #{}... Currently {}    '.format(i, 
+                print('--allMGs(): Checking mgid #{}... Currently {}    '.format(i, 
                         'out of range' if outofrange else 'in range'), end='\r')
             req[1][0].find('managedGroupId').text = str(i)
             r = s.post(host+'/elementsInformationService', data=ET.tostring(req))
@@ -71,29 +72,18 @@ def allMGs(start=0, verbose=False):
                 mgs.append(i)
             i+=1    
         if verbose:
-            print('--allMGs(): Process finished at id #', i, sep='', end=' '*20)
+            if keepVerbose:
+                print('--allMGs(): Process finished at id #', i, sep='', end=(' '*20)+'\n')
+            else:
+                print(' '*50, end='\r')
         return mgs
-
-### Commands ###
-def numOnlineByMGId(session, mgid):
-    with open(sitepath('/src/XMLReqs/getNumberOfActiveCPEs.xml'),'r') as f:
-        body = f.read()
-    req = ET.fromstring(body)
-    req[1][0].find('managedGroupId').text = str(mgid)
-
-    r = session.post(host+'/elementsInformationService', data=ET.tostring(req))
-    resp = ET.fromstring(r.text)
-    isfault = isFault(resp)
-    if isfault:
-        return isfault['faultstring']
-    else:
-        return resp[0][0].find('return').text
 
 ### Main for debugging purposes ###
 if __name__=='__main__':
+    import sys
     with requests.Session() as s:
         s.auth=(_username, _password)
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
-        
-        for i in allMGs(verbose=True):
-            print(i, isMG(i), sep=': ') 
+       
+        for i in allMGs(verbose=True,keepVerbose=True):
+            print(i, isMG(i), sep=': ')
