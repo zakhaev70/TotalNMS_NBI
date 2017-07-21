@@ -1,6 +1,6 @@
 ### Updates requirements_py.txt ###
-source __pyvenv__/bin/activate  #comment out if you wish
-pip freeze -l > requirements_py.txt
+source __pyvenv__/bin/activate;  #comment out if you wish
+pip freeze -l > requirements_py.txt;
 
 ### Updates README.md with new text and sitemap ###
 home='..'

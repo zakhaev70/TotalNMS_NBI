@@ -19,7 +19,7 @@ You may also just execute `./tools/setup_for_py3.sh .` from the root directory a
 sudo apt-get install python3;  #comment out if not on Linux or permission errors
 python3 -m venv __pyvenv__;
 source __pyvenv__/bin/activate;  #specific to bash, check docs for more
-pip install -r requirements_py.txt
+pip install -r requirements_py.txt;
 ```
 
 ### Contribution instructions
