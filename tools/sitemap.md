@@ -9,6 +9,7 @@
 │   ├── onlineReport.py
 ├── .gitignore
 ├── README.md
+├── requirements_py.txt
 ├── src
 │   ├── helpers.js
 │   ├── ns.json
@@ -54,6 +55,7 @@
 │   │   ├── out.txt
 ├── tools
 │   ├── readmetxt.md
+│   ├── setup_for_py.sh
 │   ├── sitemap.md
 │   ├── updatereadme.sh
 │   ├── writemap.sh
