@@ -11,7 +11,7 @@ Usage
 ### Requirements
 The only installations and downloads needed are those pertaining to *Python 3*:
 - Python 3: [download here](https://www.python.org/downloads/)
-- Recommended Python's venv (virtual environment). If you work on a venv, you will be able to update requirements_py.txt appropriately: `python3 -m venv __pyvenv__`, then `source __pyvenv/bin/activate` ([Python 3 docs](https://docs.python.org/3/library/venv.html))
+- Recommended Python's venv (virtual environment). If you work on a venv, you will be able to update requirements_py.txt appropriately: `python3 -m venv __pyvenv__`, then `source __pyvenv__/bin/activate` ([Python 3 docs](https://docs.python.org/3/library/venv.html))
 - Modules: `pip install -r requirements_py.txt`
 
 You may also just execute `./tools/setup_for_py3.sh .` from the root directory after adding execution permissions (`chmod +x ./tools/setup_for_py3.sh`). The sript executed will be:
@@ -19,8 +19,10 @@ You may also just execute `./tools/setup_for_py3.sh .` from the root directory a
 sudo apt-get install python3;  #comment out if not on Linux or permission errors
 python3 -m venv __pyvenv__;
 source __pyvenv__/bin/activate;  #specific to bash, check docs for more
+pip install --upgrade pip;
 pip install -r requirements_py.txt;
 ```
+After executing this script, you would still want to activate the venv by running `source __pyvenv__/bin/activate`.
 
 ### Contribution instructions
 Before submitting any changes, make sure to (review and) run `./tools/updatereadme.sh .` from the root directory of the repo. This will update requirements_py.txt and README.md (text and sitemap). You might need to add some permissions: `chmod +x ./tools/updatereadme.sh` & `chmod +x ./tools/writemap.sh`
