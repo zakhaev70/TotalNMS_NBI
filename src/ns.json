@@ -2,6 +2,7 @@
     "_comment": "namespaces used in NBI's SOAP messages",
 	"soapenv": "http://schemas.xmlsoap.org/soap/envelope/",
     "soap": "http://schemas.xmlsoap.org/soap/envelope/",
+    "ns0": "urn:com.gilat.ngnms.server.ws.dto.cfg",
 	"ns1": "http://schemas.xmlsoap.org/soap/http",
 	"ns2": "com.gilat.ngnms.server.services.ws.cfg.face",
 	"ns3": "urn:com.gilat.ngnms.server.ws.faults.dto",
