@@ -62,6 +62,7 @@ Sitemap
 │   ├── Manual NBI.pdf
 │   ├── Presentación NBI.pptx
 ├── functions
+│   ├── elementPerformance.py
 │   ├── NBI.py
 │   ├── onlineReport.py
 │   ├── RFAudit6.csv
@@ -77,6 +78,7 @@ Sitemap
 │   │   ├── getCPEpartNumber.xml
 │   │   ├── getCPEsByManagedGroup.xml
 │   │   ├── getCPEVolumes.xml
+│   │   ├── getElementPerformance.xml
 │   │   ├── getNumberOfActiveCPEs.xml
 │   │   ├── req_headers.txt
 ├── techniques

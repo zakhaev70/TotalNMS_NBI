@@ -1,0 +1,22 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="com.gilat.ngnms.server.services.ws.cfg.face">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getElementPerformance>
+         <reportElement>
+            <element>
+               <eType>?</eType>
+               <eId>2</eId>
+               <cpeId>
+                  <managedGroupId>2</managedGroupId>
+                  <subscriberId>1</subscriberId>
+               </cpeId>
+            </element>
+            <reportType>?</reportType>
+            <resolution>?</resolution>
+            <startDate>?</startDate>
+            <endDate>?</endDate>
+         </reportElement>
+         <lastIndex>?</lastIndex>
+      </com:getElementPerformance>
+   </soapenv:Body>
+</soapenv:Envelope>
