@@ -34,8 +34,15 @@ If ran locally, cross-origin errors might occur, especially with .html and .js f
 
 Since the NBI server currently does not fulfill all CORS requirements, you might need to send all your requests (especially those from .js files) to the proxy server found in /src/serve.py, through ip address `http://127.0.0.1:9000`. This is a Python 3 script, so you will need to run it as such, and keep it running while your application is in process.
 
+/functions
+----------
+Contains a set of functions in Python to work with NBI.
+
+### NBI.py
+Module with useful functionality, common for most functions and applications. Includes host, authentication credentials, namespace definitions, etc.
+
 /techniques
---------------
+-----------
 ### EasySoap(Beta)
 Contains just a few attempts to use EasySoap for NodeJS. Not of much interest, but could investigate further on this topic.
 
