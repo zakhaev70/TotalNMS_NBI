@@ -1,7 +1,7 @@
 .git
 *~
 *.swp
-__pycache__
-__pyvenv__
+__pycache__/
+__pyvenv__/
 
-RFAudit*.csv
+RFAuditResults/

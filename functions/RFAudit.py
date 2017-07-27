@@ -48,7 +48,7 @@ def initialRFAudit(session, mgid, opState='all', pretty=True):
 
 ### Main for debugging purposes ###
 if __name__=='__main__':
-    import sys
+    import sys, os
     with requests.Session() as s:
         s.auth=(NBI._username, NBI._password)
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
@@ -57,15 +57,21 @@ if __name__=='__main__':
         if not mgid:  #default to 6
             mgid = 6
         print('Working...',end='\r')
+
         headerrow = ['subscriberId','operationalState','Status','RTN CoPol C/N','RTN Cross-Pol C/N',
                     'RTN Co/Cross-Pol Delta','FWD Rx Es/N0','IB Threshold','OB Threshold','Start Date',
                     'Start Time', 'End Date', 'End Time','Attenuator P1 dB']
         irfa = initialRFAudit(s, mgid)
-        with open('RFAudit{}.csv'.format(mgid), 'w') as csvf:
+
+        filepath = NBI.sitepath('/functions/RFAuditResults')
+        if not os.path.exists(filepath):
+            os.makedirs(filepath)
+        filename = '{}/RFAudit{}.csv'.format(filepath, mgid)
+        with open(filename, 'w') as csvf:
             csvw = csv.writer(csvf)
             csvw.writerow(headerrow)
             for cpeRF in sorted(irfa, key=lambda x: x[0]):
                 csvw.writerow(cpeRF[:2] + cpeRF[2][0])
                 for RFAudit in cpeRF[2][1:]:
                     csvw.writerow(['',''] + RFAudit)
-        print('Done. Results written to RFAudit{}.csv'.format(mgid))
+        print('Done. Results written to', filename)
