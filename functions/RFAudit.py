@@ -53,14 +53,19 @@ if __name__=='__main__':
         s.auth=(NBI._username, NBI._password)
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
         
+        mgid = input('Enter MG ID: ')
+        if not mgid:  #default to 6
+            mgid = 6
+        print('Working...',end='\r')
         headerrow = ['subscriberId','operationalState','Status','RTN CoPol C/N','RTN Cross-Pol C/N',
                     'RTN Co/Cross-Pol Delta','FWD Rx Es/N0','IB Threshold','OB Threshold','Start Date',
                     'Start Time', 'End Date', 'End Time','Attenuator P1 dB']
-        irfa = initialRFAudit(s, 6)
-        with open('RFAudit6.csv', 'w') as csvf:
+        irfa = initialRFAudit(s, mgid)
+        with open('RFAudit{}.csv'.format(mgid), 'w') as csvf:
             csvw = csv.writer(csvf)
             csvw.writerow(headerrow)
             for cpeRF in sorted(irfa, key=lambda x: x[0]):
                 csvw.writerow(cpeRF[:2] + cpeRF[2][0])
                 for RFAudit in cpeRF[2][1:]:
                     csvw.writerow(['',''] + RFAudit)
+        print('Done. Results written to RFAudit{}.csv'.format(mgid))

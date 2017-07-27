@@ -3,3 +3,5 @@
 *.swp
 __pycache__
 __pyvenv__
+
+RFAudit*.csv

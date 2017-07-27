@@ -88,13 +88,8 @@ if __name__=='__main__':
         s.auth=(NBI._username, NBI._password)
         s.headers.update({'Content-Type': 'text/xml;charset=UTF-8', 'SOAPAction': '', 'Connection': 'keep-alive'})
     
-        #print(MGPerformance(s, 6, 'TX_CAPABILITY'))
-        #print('-'*40)
-        #print(MGPerformance(s, 6, 'LAST_FWD_RX_ESN0'))
-        #print('-'*40)
-        #print(CPEPerformance(s, 2, 2, 'TX_CAPABILITY'))
-        #print('-'*40)
-        print(prettyLastMGPerformance(s, 6, 'LAST_FWD_RX_ESN0'))
+        mgid = input('Enter MG Id: ')
+        print(prettyLastMGPerformance(s, mgid if mgid else 6, 'LAST_FWD_RX_ESN0'))
         print('-'*40)
-        print(prettyLastMGPerformance(s, 6, 'TX_CAPABILITY'))
+        print(prettyLastMGPerformance(s, mgid if mgid else 6, 'TX_CAPABILITY'))
         
