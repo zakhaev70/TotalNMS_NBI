@@ -14,7 +14,7 @@ The only installations and downloads needed are those pertaining to *Python 3*:
 - Recommended Python's venv (virtual environment). If you work on a venv, you will be able to update requirements_py.txt appropriately: `python3 -m venv __pyvenv__`, then `source __pyvenv__/bin/activate` ([Python 3 docs](https://docs.python.org/3/library/venv.html))
 - Modules: `pip install -r requirements_py.txt`
 
-You may also just execute `./tools/setup_for_py3.sh .` from the root directory after adding execution permissions (`chmod +x ./tools/setup_for_py3.sh`). The sript executed will be:
+You may also just execute `./tools/setup_for_py3.sh` from the root directory after adding execution permissions (`chmod +x ./tools/setup_for_py3.sh`). The sript executed will be:
 ```bash
 sudo apt-get install python3;  #comment out if not on Linux or permission errors
 python3 -m venv __pyvenv__;
@@ -23,6 +23,8 @@ pip install --upgrade pip;
 pip install -r requirements_py.txt;
 ```
 After executing this script, you would still want to activate the venv by running `source __pyvenv__/bin/activate`.
+
+If you are on Windows, however, the script to execute would be `. ./tools/setup_for_py3_win.sh` (Git Bash recommended).
 
 ### Contribution instructions
 Before submitting any changes, make sure to (review and) run `./tools/updatereadme.sh .` from the root directory of the repo. This will update requirements_py.txt and README.md (text and sitemap). You might need to add some permissions: `chmod +x ./tools/updatereadme.sh` & `chmod +x ./tools/writemap.sh`
@@ -2158,7 +2160,8 @@ Sitemap
 │   │   ├── out.txt
 ├── tools
 │   ├── readmetxt.md
-│   ├── setup_for_py.sh
+│   ├── setup_for_py3.sh
+│   ├── setup_for_py3_win.sh
 │   ├── sitemap.md
 │   ├── updatereadme.sh
 │   ├── writemap.sh
