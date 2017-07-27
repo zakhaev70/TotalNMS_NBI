@@ -71,13 +71,13 @@ def lastMGPerformance(session, mgid, reportType, onlyOnline=True):
 
 def prettyLastMGPerformance(session, mgid, reportType, onlyOnline=True):
     ret = lastMGPerformance(session,mgid,reportType, onlyOnline)
-    stringy = 'Results for MG #{} at: {}'.format( mgid, datetime.utcfromtimestamp(int(ret[0])/1000) )
+    stringy = 'Results for MG #{} at {} UTC'.format( mgid, datetime.utcfromtimestamp(int(ret[0])/1000) )
     maxlen = max(len('subscriberId'), len(reportType))
-    stringy = '|'.join(map(lambda x: x.center(maxlen), ['subscriberId',reportType]))
+    stringy += '\n' + '|'.join(map(lambda x: x.center(maxlen), ['subscriberId',reportType]))
     headlen = len(stringy)
     for sid in sorted(ret[1].keys()):
         val = ret[1][sid] if ret[1][sid] else '-'
-        stringy += '\n' + '|'.join(map(lambda x: str(x).center(maxlen), [sid,val]))
+        stringy += '\n' + '|'.join(map(lambda x: x.center(maxlen), [str(sid),str(val)+'dB']))
             
     return stringy
 
