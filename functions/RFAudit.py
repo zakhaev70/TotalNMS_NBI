@@ -55,7 +55,7 @@ if __name__=='__main__':
         
         mgid = input('Enter MG ID: ')
         if not mgid:  #default to 6
-            mgid = 6
+            mgid = '6'
         print('Working...',end='\r')
 
         headerrow = ['subscriberId','operationalState','Status','RTN CoPol C/N','RTN Cross-Pol C/N',
@@ -66,7 +66,7 @@ if __name__=='__main__':
         filepath = NBI.sitepath('/functions/RFAuditResults')
         if not os.path.exists(filepath):
             os.makedirs(filepath)
-        filename = '{}/RFAudit{}.csv'.format(filepath, mgid)
+        filename = os.path.join(filepath, 'RFAudit{}.csv'.format(mgid))
         with open(filename, 'w') as csvf:
             csvw = csv.writer(csvf)
             csvw.writerow(headerrow)
